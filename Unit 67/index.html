@@ -1,0 +1,97 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Go Chatting</title>
+
+  <!-- CDN의 Bootstrap 사용 -->
+  <link rel="stylesheet" 
+    href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+  <!-- CDN의 jQuery 사용 -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <!-- 웹 브라우저용 socket.io JavaScript 파일 -->
+  <script src="//cdn.socket.io/socket.io-1.3.3.js"></script>
+
+  <style>
+    .container {
+      margin-top:30px;
+    }
+    #messageList {
+      width:600px;
+      height:320px;
+      padding: 10px 10px 10px 10px;
+    }
+    #inputBox {
+      width:600px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="panel panel-primary" id="messageList"><!-- 대화 창 -->
+      </div>
+    </div>
+    <div class="row">
+      <div id="inputBox"><!-- 메시지 입력 창 -->
+        <div class="input-group">  
+          <input type="text" class="form-control" id="message" placeholder="Message">
+          <span class="input-group-btn">
+            <button class="btn btn-default" id="send" type="button">Send</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var socket = io(); // socket.io 객체 생성
+
+    // 서버에서 이벤트가 왔을 때 실행할 콜백 함수 설정
+    socket.on('event', function (data) {
+      var msg
+      switch (data.EvtType) { // 이벤트 타입을 판별하여 메시지 생성
+      case 'message':
+        msg = data.User + ': ' + data.Text;
+        break;
+      case 'join':
+        msg = data.User + '님이 입장했습니다.';
+        break;
+      case 'leave':
+        msg = data.User + '님이 퇴장했습니다.';
+        break;
+      }
+
+      // <div> 태그를 생성하여 채팅 메시지를 넣어줌
+      col = $('<div>').addClass('col-md-12').text(msg)
+      row = $('<div>').addClass('row').append(col)
+      list = $('#messageList').append(row)
+      if (list.children().size() > 15)   // 채팅 메시지가 15개를 넘어가면
+        list.find('div:first').remove(); // 메시지 삭제
+    });
+
+    // 채팅 메시지를 서버에 보내는 함수
+    send = function () {
+      msg = $('#message').val()      // 입력 상자에서 메시지를 가져옴
+      if (msg != '') {               // 메시지가 있으면
+        socket.emit('message', msg); // 서버에 메시지를 보냄
+        $('#message').val('');       // 입력한 데이터 삭제
+      }
+    }
+
+    // 보내기 버튼으로 메시지를 보냄
+    $('#send').click(function () {
+      send()
+    });
+
+    // 엔터 키 입력으로 메시지를 보냄
+    $('#message').keyup(function(e) {
+      if (e.keyCode == 13) { // 13이면 엔터 키
+        send()
+      }
+    });
+  </script>
+</body>
+</html>
