@@ -17,7 +17,7 @@ func requestHandler(c net.Conn) {
 
 		fmt.Println(string(data[:n])) // 데이터 출력
 
-		c.Write(data[:n]) // 클라이언트로 데이터를 보냄
+		_, err = c.Write(data[:n]) // 클라이언트로 데이터를 보냄
 		if err != nil {
 			fmt.Println(err)
 			return

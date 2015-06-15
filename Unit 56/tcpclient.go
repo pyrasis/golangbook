@@ -36,7 +36,7 @@ func main() {
 		for {
 			s := "Hello " + strconv.Itoa(i)
 
-			c.Write([]byte(s)) // 서버로 데이터를 보냄
+			_, err = c.Write([]byte(s)) // 서버로 데이터를 보냄
 			if err != nil {
 				fmt.Println(err)
 				return
