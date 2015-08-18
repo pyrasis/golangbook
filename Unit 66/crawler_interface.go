@@ -51,7 +51,7 @@ type GitHubStars struct {
 	fetchedUrl  *FetchedUrl      // 중복 URL을 처리할 멤버
 	fetchedRepo *FetchedRepo     // 중복 저장소 이름을 처리할 멤버
 	p           *Pipeline        // 파이프라인에 작업 요청을 보낼 멤버
-	result      chan StarsResult // 결괏값을 보낼 멤법
+	result      chan StarsResult // 결괏값을 보낼 멤버
 	url         string           // URL 처리 작업을 요청하기 위한 멤버
 }
 
