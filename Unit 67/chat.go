@@ -135,7 +135,7 @@ func main() {
 
 	// 웹 브라우저에서 socket.io로 접속했을 때 실행할 콜백 설정
 	server.On("connection", func(so socketio.Socket) {
-	 	// 웹 브라우저가 접속되면
+		// 웹 브라우저가 접속되면
 		s := Subscribe() // 구독 처리
 		Join(so.Id())    // 사용자가 채팅방에 들어왔다는 이벤트 발행
 
