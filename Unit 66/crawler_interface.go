@@ -100,7 +100,7 @@ func (g *GitHubFollowing) Parse(doc *html.Node) <-chan string {
 						}
 					}
 
-					if a.Key == "class" && a.Val == "gravatar" {
+					if a.Key == "class" && a.Val == "avatar" {
 						// 부모 요소의 첫 번째 속성(href)
 						user := n.Parent.Attr[0].Val
 

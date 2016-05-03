@@ -54,7 +54,7 @@ func parseFollowing(doc *html.Node, urls chan string) <-chan string {
 						}
 					}
 
-					if a.Key == "class" && a.Val == "gravatar" { // class가 gravatar인 요소
+					if a.Key == "class" && a.Val == "avatar" { // class가 avatar인 요소
 						user := n.Parent.Attr[0].Val // 부모 요소의 첫 번째 속성(href)
 
 						// 사용자 이름으로 팔로잉 URL을 조합하여 urls 채널에 보냄
