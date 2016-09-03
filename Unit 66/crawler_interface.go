@@ -90,7 +90,7 @@ func (g *GitHubFollowing) Parse(doc *html.Node) <-chan string {
 		f = func(n *html.Node) {
 			if n.Type == html.ElementNode && n.Data == "img" {
 				for _, a := range n.Attr {
-					if a.Key == "class" && a.Val == "avatar left" { // class가 avatar left인 요소
+					if a.Key == "class" && a.Val == "avatar float-left" { // class가 avatar float-left인 요소
 						for _, a := range n.Attr {
 							if a.Key == "alt" {
 								// 사용자 이름을 구한 뒤 채널에 보냄
