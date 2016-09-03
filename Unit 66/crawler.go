@@ -37,7 +37,7 @@ func parseFollowing(doc *html.Node) []string {
 	f = func(n *html.Node) {
 		if n.Type == html.ElementNode && n.Data == "img" { // img 태그
 			for _, a := range n.Attr {
-				if a.Key == "class" && a.Val == "avatar left" { // class가 avatar left인 요소
+				if a.Key == "class" && a.Val == "avatar float-left" { // class가 avatar left인 요소
 					for _, a := range n.Attr {
 						if a.Key == "alt" {
 							fmt.Println(a.Val) // 사용자 이름 출력
