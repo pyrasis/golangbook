@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	runtime.GOMAXPROCS(1) // CPU를 하나만 사용
+	runtime.GOMAXPROCS(1) // 시스템 스레드를 하나만 사용
 
 	s := "Hello, world!"
 
